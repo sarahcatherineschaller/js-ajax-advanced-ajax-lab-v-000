@@ -3,7 +3,7 @@ function getRepositories() {
   req.addEventListener("load", showRepositories);
   req.open("GET", 'https://api.github.com/users/octocat/repos')
   req.sent()
-}
+};
 
 function showRepositories(event, data) {
   const repos = JSON.parse(this.responseText)
@@ -11,4 +11,8 @@ function showRepositories(event, data) {
   const template = Handbars.compile(src)
   const repoList = template(repos)
   document.getElementById("repositories").innerHTML = repoList
-}
+};
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  Handlebars.registerPartial("authorPartial", document.getElementById("author-partial-template").innerHTML)
+});
